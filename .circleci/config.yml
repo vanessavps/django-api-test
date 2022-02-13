@@ -15,7 +15,7 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run migration
-          command: heroku run python manage.py migrate
+          command: python manage.py migrate
       - run:
           name: Run tests
           command: python manage.py test
@@ -31,7 +31,7 @@ workflows:
       - build-and-test
       - heroku/deploy-via-git:
           post-steps:
-            - run: python manage.py migrate
+            - run: heroku run python manage.py migrate
           requires:
             - build-and-test
           filters:
