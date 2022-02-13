@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from apps.integrations.integration import update_user_external_system
+from apps.integrations.integrations import update_user_external_system
 
 from .models import User
 from .serializers import UserSerializer
@@ -16,7 +15,7 @@ class UserDetail(APIView):
         try:
             item = User.objects.get(id=id)
         except User.DoesNotExist:
-            return Response({"error: User not found"}, status.HTTP_404_NOT_FOUND)
+            return Response({"error": "User not found"}, status.HTTP_404_NOT_FOUND)
 
         serializer = UserSerializer(item)
         return Response(serializer.data, status.HTTP_200_OK)
@@ -29,9 +28,10 @@ class UserDetail(APIView):
         try:
             item = User.objects.get(id=id)
         except User.DoesNotExist:
-            return Response({"error: User not found"}, status.HTTP_404_NOT_FOUND)
+            return Response({"error": "User not found"}, status.HTTP_404_NOT_FOUND)
 
-        # Partial is not accepted. The request data needs to have name and email
+        # Partial is not accepted. The request data needs to have name and email as per documentation
+        # "The PUT method receives an object with an updated value for name and email."
         # If name or email is missing an error message with 400 status will be returned
         serializer = UserSerializer(item, data=request.data)
         if serializer.is_valid():
