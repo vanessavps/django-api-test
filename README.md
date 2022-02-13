@@ -4,7 +4,7 @@
 
 - Deployed on [Heroku](https://vanessa-project.herokuapp.com/) 
 - There's a [Postman collection](Postman-Endpoints.postman_collection.json) (v2.1) you can use to test the endpoints on Heroku
-- The project uses SQLite. It is filesystem which means Heroku will remove it when it restarts the dyno. So maybe the testing will not work on Heroku, unless the deploy is triggered again
+- The project uses SQLite. It is filesystem which means Heroku will remove it when [restarts the dyno](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). So maybe the testing will not work on Heroku, unless the deploy is triggered again
 
 ## Installation
 ### Dependencies
