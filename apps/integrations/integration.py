@@ -15,5 +15,4 @@ def update_user_external_system(user):
     if status == Status.FAIL:
         logger.error('External system failed to update user ' + userId)
     else:
-        print("info log")
         logger.info('User ' + userId + ' updated on external system')
