@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from apps.integrations.integration import update_user_external_system
 
 from .models import User
 from .serializers import UserSerializer
@@ -34,8 +35,8 @@ class UserDetail(APIView):
         # If name or email is missing an error message with 400 status will be returned
         serializer = UserSerializer(item, data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            updateUserExternalSystem(serializer)
+            savedUser = serializer.save()
+            update_user_external_system(savedUser)
             return Response(serializer.data, status.HTTP_200_OK)
         else:
             return Response({"error": serializer.errors}, status.HTTP_400_BAD_REQUEST)
