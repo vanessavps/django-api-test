@@ -30,6 +30,8 @@ workflows:
     jobs:
       - build-and-test
       - heroku/deploy-via-git:
+          post-steps:
+            - run: python manage.py migrate
           requires:
             - build-and-test
           filters:
