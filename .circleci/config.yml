@@ -15,7 +15,7 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run migration
-          command: python manage.py migrate
+          command: heroku run python manage.py migrate
       - run:
           name: Run tests
           command: python manage.py test
